@@ -1,4 +1,5 @@
 import 'package:b05/models/product.dart';
+import 'package:b05/views/orders_history_screen.dart';
 import 'package:b05/views/screen_cart.dart';
 import 'package:b05/views/screen_input_data.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class ScreenTest extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-
+              Get.to(OrdersHistoryScreen());
             },
             icon: Obx(() {
                 return Badge(

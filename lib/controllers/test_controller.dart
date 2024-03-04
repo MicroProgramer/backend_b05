@@ -49,8 +49,9 @@ class TestController extends GetxController {
   }
 
   void initGetStorageListen() {
-    GetStorage().listenKey('products', (value) {
-      initData(value);
+    GetStorage().listen(() {
+      initData(GetStorage().read('products'));
+      orders.value = getOrdersHistory();
     });
   }
 
@@ -85,22 +86,24 @@ class TestController extends GetxController {
   }
 
   void placeOrder() {
+    var orderProducts = selectedProducts.map((element) {
+      var controller = Get.find<CartItemController>(tag: element.id);
+      int qty = controller.quantity;
+      return OrderCartItem(product: element, quantity: qty);
+    }).toList();
+
     var order = Order(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
-      product: selectedProducts.first,
-      quantity: selectedProducts.length,
+      products: orderProducts,
+      timestamp: DateTime.now().millisecondsSinceEpoch
     );
     selectedProducts.clear();
-    orders.value = getOrdersHistory();
-
-
     GetStorage().write("order_${order.id}", order.toMap());
   }
 
   List<Order> getOrdersHistory() {
     List<Order> orders = [];
     var allOrderKeys = GetStorage().getKeys<Iterable<String>>().where((element) => element.startsWith('order_')).toList();
-
     allOrderKeys.forEach((element) {
       orders.add(Order.fromMap(GetStorage().read(element) as Map<String, dynamic>));
     });

@@ -44,6 +44,7 @@ dependencies:
   html: ^0.15.4
   device_info_plus: ^9.1.2
   path_provider: ^2.1.2
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

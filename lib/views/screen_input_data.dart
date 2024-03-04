@@ -14,59 +14,61 @@ class ScreenInputData extends StatelessWidget {
       appBar: AppBar(
         title: Text("Input Data"),
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              controller: nameController,
-              decoration: InputDecoration(label: Text("Name")),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: nameController,
+                decoration: InputDecoration(label: Text("Name")),
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              controller: desController,
-              decoration: InputDecoration(label: Text("Description")),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: desController,
+                decoration: InputDecoration(label: Text("Description")),
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              controller: priceController,
-              decoration: InputDecoration(label: Text("Price")),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: priceController,
+                decoration: InputDecoration(label: Text("Price")),
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              controller: imageController,
-              decoration: InputDecoration(label: Text("Image Url")),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: imageController,
+                decoration: InputDecoration(label: Text("Image Url")),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                var name = nameController.text;
-                var des = desController.text;
-                var price = double.tryParse(priceController.text) ?? 0;
-                var image = imageController.text;
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  var name = nameController.text;
+                  var des = desController.text;
+                  var price = double.tryParse(priceController.text) ?? 0;
+                  var image = imageController.text;
 
-                var id = UniqueKey().toString();
+                  var id = UniqueKey().toString();
 
-                var product = Product(
-                  id: id,
-                  name: name,
-                  description: des,
-                  price: price,
-                  image: image,
-                );
-                Get.back(result: product);
-              },
-              child: Text("Add"))
-        ],
+                  var product = Product(
+                    id: id,
+                    name: name,
+                    description: des,
+                    price: price,
+                    image: image,
+                  );
+                  Get.back(result: product);
+                },
+                child: Text("Add"))
+          ],
+        ),
       ),
     );
   }
